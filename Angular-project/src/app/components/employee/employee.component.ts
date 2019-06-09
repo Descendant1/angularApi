@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Employee } from '../../models/employee';
 import { EmployeeService } from '../../services/employee/employee.service';
+import { ConcatSource } from 'webpack-sources';
+import { EmployeeFormComponent } from '../employee-form/employee-form.component';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -11,21 +14,43 @@ import { EmployeeService } from '../../services/employee/employee.service';
 export class EmployeeComponent implements OnInit {
 
   employees: Employee[];
+  @Output() empSelected :EventEmitter<Employee> =  new EventEmitter();
+
   constructor(private employeeService: EmployeeService) { }
 
   ngOnInit() {
     this.employeeService.getEmployees().subscribe(emp=>{
       this.employees =  emp;
+      
     });
   }
 
+
+  deleteEmployee(employee:Employee) {
+    this.employeeService.deleteEmployee(employee.id);
+    this.employees = this.employees.filter(emp=> emp.id != employee.id);
+  }
+  saveEmployee(employee:Employee) {
+    if(employee)
+      this.employeeService.saveEmployee(employee).subscribe(i=>{
+          if(employee.id == 0){
+            debugger;
+            console.log(i)
+            this.employees.push(new Employee(i.id
+                                              ,i.name
+                                              ,i.salary
+                                              ,i.age
+                                              ,i.profile_image));
+          }
+      });
+  }
+
   onClick(th:Employee){
-    console.log(th);
-    this.employeeService.deleteEmployee(th.id);
-    var a = new Employee();
-    a.employee_age = 2500;
-    a.employee_name = 'AAAAAAAAAAAAAAAAAAAAAAAA';
-    a.employee_salary = 12312312;
-    console.log(this.employeeService.createEmployee(a));
+    this.employees.forEach(element => {
+      element.isSelected =  false;
+    });
+    th.isSelected =  true ;
+    this.empSelected.emit(th);
+
   }
 }

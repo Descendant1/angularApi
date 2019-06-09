@@ -1,3 +1,33 @@
-<p *ngFor="let employee of employees"  (click)="onClick(employee)">
-    {{employee.id}}  {{employee.employee_name }}  {{employee.employee_age}} 
-</p>
+<h1>Hello from employee component</h1>
+<div>
+<div style="display: inline-block;">
+<table style="width: 60%;" class="table table-hover table-dark">
+    <thead >
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Email</th>
+        <th scope="col">Name</th>
+        <th scope="col">Salary</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees" 
+      (click) ="onClick(employee);"
+      [ngClass]="employee.isSelected ? 'selected' : ''"
+      >
+        <th scope="row">{{employee.id}}</th>
+        <td>{{employee.employee_name}}</td>
+        <td >{{employee.employee_age}}</td>
+        <td>{{employee.employee_salary}}</td>
+        <td>
+            <button (click)="deleteEmployee(employee,this);">Del</button>
+        </td>
+    </tr>
+    </tbody>
+  </table>
+</div>  
+
+  <app-employee-form></app-employee-form>
+
+</div>

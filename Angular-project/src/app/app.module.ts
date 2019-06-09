@@ -7,13 +7,19 @@ import { AppComponent } from './app.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { HeaderComponent } from './components/header/header.component';
 import { EmployeeFormComponent } from './components/employee-form/employee-form.component';
+import { UserComponent } from './components/user/user.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
+import { MainComponent } from './components/main/main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     EmployeeComponent,
-    EmployeeFormComponent
+    EmployeeFormComponent,
+    UserComponent,
+    UserFormComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,

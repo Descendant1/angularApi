@@ -6,6 +6,12 @@ export  class Employee
     employee_age    : number;
     profile_image   : string;
     isSelected      : boolean;
+    // Solution for api response diff.
+    name: string;
+    salary: number;
+    age: number;
+
+
 
     constructor ( id:number
                  ,name   : string

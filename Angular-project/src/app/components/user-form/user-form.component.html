@@ -1,0 +1,40 @@
+<div class="container" style="display: inline-block;
+position: fixed;
+top: 21%;
+max-width: 25% !important; max-height: 65% !important; overflow: auto;  ">
+  <h1>User Form</h1>
+  <h4>Click on table record to update entity</h4>
+
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+    <div class="form-group">
+      <label for="email">User Email</label>
+      <input type="text" class="form-control" id="name" required [(ngModel)]="user.email" name="email" #name="ngModel">
+
+      <div [hidden]="user || user.pristine" class="alert alert-danger">
+        Email is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="first_name">User First Name</label>
+      <input type="text" class="form-control" id="first_name" required [(ngModel)]="user.first_name" name="first_name">
+    </div>
+
+    <div class="form-group">
+      <label for="last_name">User Last Name</label>
+      <input type="text" class="form-control" id="last_name" required [(ngModel)]="user.last_name" name="last_name">
+    </div>
+    <div class="form-group">
+      <label for="avatar">User Avatar</label>
+      <input type="text" class="form-control" id="last_name" required [(ngModel)]="user.avatar" name="avatar">
+    </div>
+    <div class="form-group">
+      <label for="job"> User Job</label>
+      <input type="text" class="form-control" id="job" required [(ngModel)]="user.job" name="job">
+    </div>
+
+
+    <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid">Submit</button>
+
+  </form>
+  <button class="btn btn-success" (click)="clear()">Clear</button>
+</div>
